@@ -1,0 +1,72 @@
+Смотри мне нужно создать в прицнипе приятную очень понятную и современную систему БЕЗ какого-то доп меню слева. Просто одна страничка, чёрный цвет доминирует, красивые кнопки и в целом элементы без лишних анимаций, кроме анимации загрузки или прелоада или изменения статусов. Идея такая:
+У меня есть сайт для вакансий. срм что ты щас будешь делать будет по сути служить местом добавления вакансий, их редактирования, удаления И ТАК ДАЛЕЕ, всё что позволяет БД. Итак вот конфигурация firestore:
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAvdGVXFzqU-DrAi3Sw223qyscDuYjKbG0",
+  authDomain: "vahta1-76378.firebaseapp.com",
+  projectId: "vahta1-76378",
+  storageBucket: "vahta1-76378.firebasestorage.app",
+  messagingSenderId: "1037943763154",
+  appId: "1:1037943763154:web:0e2a2dffc1de4d7279bd0b",
+  measurementId: "G-DVYZFE1PN7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+так же вот структура данных на моём сайте:
+
+Структура коллекций Firestore:
+1. Коллекция vacancies (Вакансии)
+{
+  id: "auto-generated-id",
+  title: "Название вакансии",
+  company: "Название компании", 
+  location: "Город",
+  salary: {
+    min: 80000,
+    max: 120000,
+    currency: "₽"
+  },
+  experience: "Не требуется" | "От 1 года" | "От 3 лет",
+  employment_type: "Вахтовый метод",
+  description: "Полное описание вакансии",
+  requirements: ["Требование 1", "Требование 2"],
+  benefits: ["Преимущество 1", "Преимущество 2"],
+  status: "active" | "deleted" | "draft",
+  viewCount: 0,
+  createdAt: Timestamp,
+  updatedAt: Timestamp,
+  deletedAt?: Timestamp
+}
+2. Коллекция applications (Заявки)
+{
+  id: "auto-generated-id",
+  vacancyId: "vacancy-id",
+  name: "Имя соискателя",
+  phone: "+7 999 123-45-67",
+  email: "email@example.com",
+  message: "Сопроводительное сообщение",
+  status: "new" | "viewed" | "contacted" | "rejected",
+  createdAt: Timestamp
+}
+3. Коллекция companies (Компании - опционально)
+{
+  id: "auto-generated-id",
+  name: "Название компании",
+  description: "Описание компании",
+  logo?: "url-to-logo",
+  website?: "company-website.com",
+  createdAt: Timestamp
+}
+
+Сделай всё правильно с точки зрения безопасности и обновления данных. Создай страницу аутентификации (firestore, почта пароль или телефон и смс) и тоже всё правильно с точки зрения безопасности и современных стандартов.
