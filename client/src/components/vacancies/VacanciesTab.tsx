@@ -9,17 +9,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LoadingSpinner, ModernLoader } from "@/components/ui/loading-spinner";
 import { VacancyCardSkeleton } from "@/components/ui/skeleton-loader";
-import { 
-  Plus, 
-  Search, 
-  MapPin, 
-  DollarSign, 
-  Clock, 
-  Calendar, 
-  Edit, 
-  Copy, 
-  Play, 
-  Pause, 
+import {
+  Plus,
+  Search,
+  MapPin,
+  DollarSign,
+  Clock,
+  Calendar,
+  Edit,
+  Copy,
+  Play,
+  Pause,
   Trash2,
   Eye,
   Briefcase
@@ -33,14 +33,14 @@ export function VacanciesTab() {
   const [editingVacancy, setEditingVacancy] = useState<Vacancy | null>(null);
   const [selectedVacancy, setSelectedVacancy] = useState<Vacancy | null>(null);
   const [activeTab, setActiveTab] = useState<"active" | "draft" | "deleted">("active");
-  
-  const { 
-    vacancies, 
-    loading, 
-    filters, 
-    setFilters, 
-    deleteVacancy, 
-    duplicateVacancy, 
+
+  const {
+    vacancies,
+    loading,
+    filters,
+    setFilters,
+    deleteVacancy,
+    duplicateVacancy,
     toggleVacancyStatus,
     incrementViewCount
   } = useVacancies();
@@ -75,7 +75,7 @@ export function VacanciesTab() {
       draft: "bg-yellow-500/20 text-yellow-400",
       deleted: "bg-red-500/20 text-red-400"
     };
-    
+
     const labels = {
       active: "Активна",
       draft: "Черновик",
@@ -112,7 +112,7 @@ export function VacanciesTab() {
             <p className="text-muted-foreground">Создавайте, редактируйте и управляйте вакансиями</p>
           </div>
         </div>
-        
+
         {/* Skeleton карточки */}
         <div className="space-y-4">
           {Array.from({ length: 3 }).map((_, index) => (
@@ -167,7 +167,7 @@ export function VacanciesTab() {
               Удалённые ({vacancies.filter(v => v.status === "deleted").length})
             </Button>
           </div>
-          
+
           {/* Поиск */}
           <div className="relative">
             <Input
@@ -179,7 +179,7 @@ export function VacanciesTab() {
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           </div>
-          
+
           {/* Компактные фильтры */}
           <div className="grid grid-cols-2 gap-2 mt-3">
             <Select value={filters.status} onValueChange={(value) => setFilters(prev => ({ ...prev, status: value }))}>
@@ -208,7 +208,7 @@ export function VacanciesTab() {
         </div>
 
         {/* Компактный список вакансий */}
-        <div className="space-y-2 max-h-[calc(100vh-350px)] overflow-y-auto">
+        <div className="space-y-2">
           {loading ? (
             <div className="space-y-2">
               {Array.from({ length: 4 }).map((_, index) => (
@@ -227,8 +227,8 @@ export function VacanciesTab() {
             </Card>
           ) : (
             filteredVacancies.map((vacancy) => (
-              <Card 
-                key={vacancy.id} 
+              <Card
+                key={vacancy.id}
                 className={`card-hover cursor-pointer transition-all ${
                   selectedVacancy?.id === vacancy.id ? 'ring-2 ring-primary border-primary' : ''
                 }`}
@@ -390,9 +390,9 @@ export function VacanciesTab() {
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-4 h-4 text-muted-foreground" />
                       <span className="text-foreground">
-                        {formatDistanceToNow(selectedVacancy.createdAt.toDate(), { 
-                          addSuffix: true, 
-                          locale: ru 
+                        {formatDistanceToNow(selectedVacancy.createdAt.toDate(), {
+                          addSuffix: true,
+                          locale: ru
                         })}
                       </span>
                     </div>
